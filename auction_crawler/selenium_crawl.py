@@ -79,11 +79,15 @@ def get_highest_bids() -> list:
             bids.append(bid.text)
     return bids
 
-print(get_highest_bids())
+
+def get_auction_link() -> list:
+    auction_link_ends = driver.find_elements(By.XPATH, "//a[contains(@href, '/auctions/') and not(contains(@class, 'hidden'))]")
+    links = []
+    for link in auction_link_ends:
+        links.append(link.get_attribute("href"))
+    return links
+
+
+
 # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
 # xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
-
-# xpath to auction end date - "//div[contains(@class, 'pl-9')]"
-# xpath to starting price - //div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and not(contains(@class, 'font-semibold'))]
-# xpath to highest bid(may be null/0 or nothin) - //div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and contains(@class, 'font-semibold')
-# xpath to link end - '//a[contains(@href, '/auctions/') and not(contains(@class, 'hidden'))]'
