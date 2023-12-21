@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b94083d8-1064-48c5-a01c-b514b7ebf8ce" name="Changes" comment="Added functionality for selenium crawl to scroll infinitely or for estimated time">
+    <list default="true" id="b94083d8-1064-48c5-a01c-b514b7ebf8ce" name="Changes" comment="Extracted xpath's to wanted data and marked it down for later implementation.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction_crawler/selenium_crawl.py" beforeDir="false" afterPath="$PROJECT_DIR$/auction_crawler/selenium_crawl.py" afterDir="false" />
     </list>
@@ -114,8 +114,27 @@
       <option name="project" value="LOCAL" />
       <updated>1703169202742</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Extracted xpath's to wanted data and marked it down for later implementation.">
+      <option name="closed" value="true" />
+      <created>1703171507258</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1703171507258</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
@@ -125,6 +144,7 @@
     <MESSAGE value="Added test to check if get_links function returns links with response [200]." />
     <MESSAGE value="Working on crawl using selenium" />
     <MESSAGE value="Added functionality for selenium crawl to scroll infinitely or for estimated time" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functionality for selenium crawl to scroll infinitely or for estimated time" />
+    <MESSAGE value="Extracted xpath's to wanted data and marked it down for later implementation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Extracted xpath's to wanted data and marked it down for later implementation." />
   </component>
 </project>

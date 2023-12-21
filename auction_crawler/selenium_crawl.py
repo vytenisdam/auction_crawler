@@ -4,7 +4,7 @@ import time
 
 
 driver = webdriver.Chrome()
-driver.set_window_size(1500, 1400)
+driver.set_window_size(1200, 1200)
 
 url = 'https://foros.lt/auctions/'
 
@@ -34,7 +34,7 @@ while True:
     if new_height == last_height:
         print('done crawling end of the page')
         break
-    elif time_to_break >= 20:
+    elif time_to_break >= 2:
         print(f'Done crawling for {time_to_break} seconds')
         break
     last_height = new_height
@@ -43,13 +43,43 @@ while True:
 # driver.implicitly_wait(50)
 #takes a screenshot after unchecking
 # driver.save_screenshot()
-data_elements = driver.find_elements(By.XPATH, "//p[contains(@class, 'md:mb-auto')]")
-sum = 0
-for element in data_elements:
-    sum += 1
-    print(element.text)
-print(sum)
 
+
+def get_property_names() -> list:
+    property_names = driver.find_elements(By.XPATH, "//p[contains(@class, 'md:mb-auto')]")
+    names = []
+    for name in property_names:
+        names.append(name.text)
+    return names
+
+
+def get_property_price() -> list:
+    property_prices = driver.find_elements(By.XPATH, "//div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and not(contains(@class, 'font-semibold'))]")
+    prices = []
+    for price in property_prices:
+        prices.append(price)
+    return prices
+
+
+def get_auction_end_dates() -> list:
+    auction_end_dates = driver.find_elements(By.XPATH, "//div[contains(@class, 'pl-9')]")
+    end_dates = []
+    for date in auction_end_dates:
+        end_dates.append(date.text[:10:])
+    return end_dates
+
+
+def get_highest_bids() -> list:
+    highest_bids = driver.find_elements(By.XPATH, "//div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and contains(@class, 'font-semibold')]")
+    bids = []
+    for bid in highest_bids:
+        if bid.text == '':
+            bids.append('0')
+        else:
+            bids.append(bid.text)
+    return bids
+
+print(get_highest_bids())
 # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
 # xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
 
