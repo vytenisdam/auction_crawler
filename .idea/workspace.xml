@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b94083d8-1064-48c5-a01c-b514b7ebf8ce" name="Changes" comment="" />
+    <list default="true" id="b94083d8-1064-48c5-a01c-b514b7ebf8ce" name="Changes" comment="Working on Readme.md file.">
+      <change afterPath="$PROJECT_DIR$/auction_crawler/auction_crawler.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +11,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 0
@@ -23,7 +28,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Vytenis/PycharmProjects/auction_crawler/auction_crawler"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -42,6 +48,28 @@
       <option name="presentableId" value="Default" />
       <updated>1703164533142</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1703164772694</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703164772694</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Working on Readme.md file.">
+      <option name="closed" value="true" />
+      <created>1703164841696</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703164841696</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Working on Readme.md file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on Readme.md file." />
   </component>
 </project>
