@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
 import time
 
 
@@ -11,8 +10,8 @@ url = 'https://foros.lt/auctions/'
 
 driver.get(url)
 checkbox = driver.find_element(By.XPATH, '//input[contains(@type, "checkbox")]')
-#takes a screenshot before unchecking
-# driver.save_screenshot('1.png')
+#takes a screenshot before unchecking checkbox
+# driver.save_screenshot()
 if checkbox.is_selected():
     checkbox.click()
 # Should be a better option
@@ -43,7 +42,7 @@ while True:
 # Cant make it to work
 # driver.implicitly_wait(50)
 #takes a screenshot after unchecking
-# driver.save_screenshot('2.png')
+# driver.save_screenshot()
 data_elements = driver.find_elements(By.XPATH, "//p[contains(@class, 'md:mb-auto')]")
 sum = 0
 for element in data_elements:
@@ -51,4 +50,10 @@ for element in data_elements:
     print(element.text)
 print(sum)
 
+# Try to change container value to Baigiasi vėliausiai, for most recent items in page.
+# xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
 
+# xpath to auction end date - "//div[contains(@class, 'pl-9')]"
+# xpath to starting price - //div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and not(contains(@class, 'font-semibold'))]
+# xpath to highest bid(may be null/0 or nothin) - //div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and contains(@class, 'font-semibold')
+# xpath to link end - '//a[contains(@href, '/auctions/') and not(contains(@class, 'hidden'))]'
