@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import time
 
 
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+driver = webdriver.Chrome(options = chrome_options)
 driver.set_window_size(1200, 1200)
 
 url = 'https://foros.lt/auctions/'
 
 driver.get(url)
 checkbox = driver.find_element(By.XPATH, '//input[contains(@type, "checkbox")]')
-#takes a screenshot before unchecking checkbox
-# driver.save_screenshot()
+
 if checkbox.is_selected():
     checkbox.click()
-# Should be a better option
+# Maybe could be a better way to do this
 time.sleep(2)
 
 SCROLL_PAUSE_TIME = 2
@@ -41,8 +43,6 @@ while True:
 
 # Cant make it to work
 # driver.implicitly_wait(50)
-#takes a screenshot after unchecking
-# driver.save_screenshot()
 
 
 def get_property_names() -> list:
@@ -87,7 +87,8 @@ def get_auction_link() -> list:
         links.append(link.get_attribute("href"))
     return links
 
-
+a = get_auction_link()
+print(a)
 
 # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
 # xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
