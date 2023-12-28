@@ -97,6 +97,7 @@ def get_auction_link() -> list:
 
 # scroll time != crawl time, is it okay to leave scroll time limit or time limit should be for all processes in crawling.
 
+
 scroll_website(10)
 a = get_auction_link()
 print(a)
