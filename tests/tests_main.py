@@ -20,8 +20,8 @@ class TestScrollWebsite(unittest.TestCase):
 
 class TestFormatToFloat(unittest.TestCase):
     def test_format_to_float(self):
-        input_string = ['4 575,54 €', '1234 56 $']
-        expected_result = [4575.54, 123456]
+        input_string = [None, '4 575,54 €', '1234 56 $', 1235]
+        expected_result = [0.0, 4575.54, 123456, 1235]
 
         result = [format_to_float(i) for i in input_string]
         self.assertEqual(result, expected_result)

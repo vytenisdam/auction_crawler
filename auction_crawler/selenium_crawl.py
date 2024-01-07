@@ -108,14 +108,17 @@ def data_format(names: list, prices: list, end_dates: list, bids: list, links: l
             'Auction link': link
         }
         for name, price, date, bid, link in zip(names, prices, end_dates, bids, links)]
-# scroll time != crawl time, is it okay to leave scroll time limit or time limit should be for all processes in crawling.
 
 
 def format_to_float(to_be_number: str) -> float:
     """Formats string format '00 000,00 €', to float type."""
-    numeric_string = to_be_number.replace(' ', '').replace(',', '.')
-
-    return float(numeric_string[:-1])
+    if to_be_number is None:
+        return 0.0
+    elif type(to_be_number) is int:
+        return float(to_be_number)
+    else:
+        numeric_string = to_be_number.replace(' ', '').replace(',', '.')
+        return float(numeric_string[:-1])
 
 
 def crawl_site() -> None:
