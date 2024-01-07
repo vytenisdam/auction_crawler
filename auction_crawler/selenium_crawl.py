@@ -93,7 +93,12 @@ def get_auction_link() -> list:
     auction_link_ends = driver.find_elements(By.XPATH, "//a[contains(@href, '/auctions/') and not(contains(@class, 'hidden'))]")
     links = []
     for link in auction_link_ends:
-        links.append(link.get_attribute("href"))
+        if link.get_attribute("href") is None:
+            links.append(None)
+        elif type(link.get_attribute("href")) is int or float:
+            links.append(None)
+        else:
+            links.append(link.get_attribute("href"))
     return links
 
 
