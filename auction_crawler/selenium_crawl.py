@@ -62,7 +62,7 @@ def get_property_price() -> list:
     property_prices = driver.find_elements(By.XPATH, "//div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and not(contains(@class, 'font-semibold'))]")
     prices = []
     for price in property_prices:
-        prices.append(price.text)
+        prices.append(format_to_float(price.text))
     return prices
 
 
@@ -81,9 +81,9 @@ def get_highest_bids() -> list:
     bids = []
     for bid in highest_bids:
         if bid.text == '':
-            bids.append('0')
+            bids.append(0.0)
         else:
-            bids.append(bid.text)
+            bids.append(format_to_float(bid.text))
     return bids
 
 
@@ -110,6 +110,12 @@ def data_format(names: list, prices: list, end_dates: list, bids: list, links: l
 # scroll time != crawl time, is it okay to leave scroll time limit or time limit should be for all processes in crawling.
 
 
+def format_to_float(to_be_number: str) -> float:
+    numeric_string = to_be_number.replace(' ', '').replace(',', '.')
+
+    return float(numeric_string[:-1])
+
+
 def crawl_site():
     """All forest crawler functionality in one function. Returns a dictionary of crawled data."""
     start_time = time.monotonic()
@@ -127,8 +133,10 @@ def crawl_site():
 crawl_site()
 
 # scroll_website(5)
-# a = get_property_price()
+# a = get_highest_bids()
 # print(a)
+# for i in a[:3:]:
+#     print(type(i))
 # end_time = time.monotonic()
 # print(end_time-start_time)
 # # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
