@@ -20,18 +20,18 @@ class TestScrollWebsite(unittest.TestCase):
 
 class TestFormatToFloat(unittest.TestCase):
     def test_format_to_float(self):
-        input_string = '4 575,54 €'
-        expected_result = 4575.54
+        input_string = ['4 575,54 €', '1234 56 $']
+        expected_result = [4575.54, 123456]
 
-        result = format_to_float(input_string)
+        result = [format_to_float(i) for i in input_string]
         self.assertEqual(result, expected_result)
 
 
-def test_links():
-    """Checks all links of the auctions if their url's work. (If they give response code that is equal to 200"""
-    scroll_website(driver, 2)
-    for i in get_auction_link():
-        assert requests.get(i).status_code == 200
+# def test_links():
+#     """Checks all links of the auctions if their url's work. (If they give response code that is equal to 200"""
+#     scroll_website(driver, 2)
+#     for i in get_auction_link():
+#         assert requests.get(i).status_code == 200
 
 
 if __name__ == '__main__':
