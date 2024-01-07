@@ -41,7 +41,7 @@ def scroll_website(web_driver, time_limit: int) -> None:
         # Calculate new scroll height and compare with the last scroll height.
         new_height = web_driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
-            print('Done scrolling end of the page')
+            print('Done scrolling end of the page.')
             break
         elif time_to_break >= time_limit:
             print(f'Done scrolling for {time_to_break} seconds')
