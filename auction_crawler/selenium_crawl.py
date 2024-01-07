@@ -62,7 +62,7 @@ def get_property_price() -> list:
     property_prices = driver.find_elements(By.XPATH, "//div[contains(@class, 'text-black') and contains(@class, 'font-poppins') and contains(@class, 'text-lg') and not(contains(@class, 'font-semibold'))]")
     prices = []
     for price in property_prices:
-        prices.append(price)
+        prices.append(price.text)
     return prices
 
 
@@ -95,13 +95,41 @@ def get_auction_link() -> list:
         links.append(link.get_attribute("href"))
     return links
 
+
+def data_format(names: list, prices: list, end_dates: list, bids: list, links: list) -> list:
+    """Joins the crawled data of each auction to dictionary and returns a list of dictionaries."""
+    return [
+        {
+            'Property name': name,
+            'Property price': price,
+            'Auction end date': date,
+            'Highest bid': bid,
+            'Auction link': link
+        }
+        for name, price, date, bid, link in zip(names, prices, end_dates, bids, links)]
 # scroll time != crawl time, is it okay to leave scroll time limit or time limit should be for all processes in crawling.
 
 
-scroll_website(10)
-a = get_auction_link()
-print(a)
-end_time = time.monotonic()
-print(end_time-start_time)
-# Try to change container value to Baigiasi vėliausiai, for most recent items in page.
-# xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
+def crawl_site():
+    """All forest crawler functionality in one function. Returns a dictionary of crawled data."""
+    start_time = time.monotonic()
+    scroll_website(10)
+    names = get_property_names()
+    prices = get_property_price()
+    end_dates = get_auction_end_dates()
+    highest_bids = get_highest_bids()
+    links = get_auction_link()
+    # print(type(data_format(names, prices, end_dates, highest_bids, links)[0]))
+    for i in data_format(names, prices, end_dates, highest_bids, links):
+        print(i)
+    end_time = time.monotonic()
+    print(end_time - start_time)
+crawl_site()
+
+# scroll_website(5)
+# a = get_property_price()
+# print(a)
+# end_time = time.monotonic()
+# print(end_time-start_time)
+# # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
+# # xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
