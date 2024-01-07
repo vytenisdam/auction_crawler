@@ -1,8 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import requests
-
 import time
 
 
@@ -12,6 +10,7 @@ import time
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 driver = webdriver.Chrome(options=chrome_options)
+# Window size, important if not using headless.
 driver.set_window_size(1200, 1200)
 
 
@@ -34,17 +33,16 @@ def scroll_website(driver, time_limit: int) -> None:
     while True:
         # Scroll down to bottom
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
         # Wait to load the page
         time.sleep(scroll_pause_time)
         time_to_break += 2
         # Calculate new scroll height and compare with the last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
-            print('done crawling end of the page')
+            print('Done scrolling end of the page')
             break
         elif time_to_break >= time_limit:
-            print(f'Done crawling for {time_to_break} seconds')
+            print(f'Done scrolling for {time_to_break} seconds')
             break
         last_height = new_height
 
@@ -93,12 +91,7 @@ def get_auction_link() -> list:
     auction_link_ends = driver.find_elements(By.XPATH, "//a[contains(@href, '/auctions/') and not(contains(@class, 'hidden'))]")
     links = []
     for link in auction_link_ends:
-        if link.get_attribute("href") is None:
-            links.append(None)
-        elif type(link.get_attribute("href")) is int or float:
-            links.append(None)
-        else:
-            links.append(link.get_attribute("href"))
+        links.append(link.get_attribute("href"))
     return links
 
 
@@ -124,26 +117,3 @@ def format_to_float(to_be_number: str) -> float:
     else:
         numeric_string = to_be_number.replace(' ', '').replace(',', '.')
         return float(numeric_string[:-1])
-
-
-def crawl_site() -> None:
-    """All forest crawler functionality in one function. Returns a dictionary of crawled data."""
-
-    start_time = time.monotonic()
-    scroll_website(10)
-    names = get_property_names()
-    prices = get_property_price()
-    end_dates = get_auction_end_dates()
-    highest_bids = get_highest_bids()
-    links = get_auction_link()
-
-    # print(type(data_format(names, prices, end_dates, highest_bids, links)[0]))
-    data = data_format(names, prices, end_dates, highest_bids, links)
-    end_time = time.monotonic()
-    print(data)
-    print(end_time - start_time)
-
-
-# # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
-# # xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
-
