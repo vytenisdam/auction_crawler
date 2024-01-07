@@ -1,6 +1,8 @@
 import unittest
-from unittest.mock import Mock, patch
-from auction_crawler.selenium_crawl import scroll_website, get_auction_link, driver, format_to_float, data_format
+from selenium.webdriver.common.by import By
+from unittest.mock import MagicMock, Mock, patch
+from auction_crawler.selenium_crawl import (scroll_website, get_auction_link, driver,
+                                            format_to_float, data_format, get_property_names)
 import requests
 
 
@@ -59,6 +61,25 @@ class TestDataFormat(unittest.TestCase):
 
         result = data_format(names, prices, end_dates, bids, links)
         self.assertEqual(result, expected_result)
+
+
+class TestGetPropertyNames(unittest.TestCase):
+
+    @patch('auction_crawler.selenium_crawl.driver.find_elements')
+    def test_get_property_names(self, mock_find_elements):
+        # Mock the behavior of find_elements
+        mock_element1 = MagicMock()
+        mock_element1.text = 'Property 1'
+        mock_element2 = MagicMock()
+        mock_element2.text = 'Property 2'
+        mock_find_elements.return_value = [mock_element1, mock_element2]
+        # Call the function
+        result = get_property_names()
+        # Assert the expected result
+        expected_result = ['Property 1', 'Property 2']
+        self.assertEqual(result, expected_result)
+        # Assert that find_elements was called with the correct arguments
+        mock_find_elements.assert_called_once_with(By.XPATH, "//p[contains(@class, 'md:mb-auto')]")
 
 
 def test_links():
