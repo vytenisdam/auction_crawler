@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from auction_crawler.selenium_crawl import scroll_website, get_auction_link, driver
+from auction_crawler.selenium_crawl import scroll_website, get_auction_link, driver, format_to_float
 import requests
 #
 
@@ -16,6 +16,15 @@ class TestScrollWebsite(unittest.TestCase):
         scroll_website(mock_driver, 10)
         # Assert that the checkbox click method was called
         mock_checkbox.click.assert_called_once()
+
+
+class TestFormatToFloat(unittest.TestCase):
+    def test_format_to_float(self):
+        input_string = '4 575,54 €'
+        expected_result = 4575.54
+
+        result = format_to_float(input_string)
+        self.assertEqual(result, expected_result)
 
 
 def test_links():
