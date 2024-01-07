@@ -40,4 +40,4 @@ def crawl_site(
         file_write(data)
 
 
-crawl_site(10, 'records')
+print(crawl_site(40, 'records'))
