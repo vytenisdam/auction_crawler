@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from unittest.mock import MagicMock, Mock, patch
 from auction_crawler.selenium_crawl import (scroll_website, get_auction_link, driver,
                                             format_to_float, data_format, get_property_names)
+from auction_crawler.csv_write import file_write
+import os
 import requests
 
 
@@ -88,6 +90,26 @@ def test_links():
     for i in get_auction_link():
         if i is not None:
             assert requests.get(i).status_code == 200
+
+
+class TestFileWrite(unittest.TestCase):
+    def setUp(self):
+        # This method is called before each test method.
+        pass
+
+    def tearDown(self):
+        # This method is called after each test method.
+        # Clean up or revert changes made during the test if needed.
+        if os.path.exists('crawl_data.csv'):
+            os.remove('crawl_data.csv')
+
+    def test_file_creation(self):
+        # Call the file_write function.
+        data_to_write = [{'Property name': 'Test Property', 'Property price': 1000, 'Auction end date': '2024-01-01',
+                          'Highest bid': 800, 'Auction link': 'http://example.com/auction/1'}]
+        file_write(data_to_write)
+        # Check if the file is created.
+        self.assertTrue(os.path.exists('crawl_data.csv'))
 
 
 if __name__ == '__main__':
