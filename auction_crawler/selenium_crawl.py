@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+import requests
+
 import time
 
 
-start_time = time.monotonic()
+# start_time = time.monotonic()
 
 # Code for Chrome webdriver to work with headless mode
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 driver = webdriver.Chrome(options=chrome_options)
-# driver.set_window_size(1200, 1200)
+driver.set_window_size(1200, 1200)
 
 
-def scroll_website(time_limit: int) -> None:
-    """Scrolls through website of forest auctions."""
+def scroll_website(driver, time_limit: int) -> None:
+    """Scrolls through the website of forest auctions."""
     url = 'https://foros.lt/auctions/'
 
     driver.get(url)
@@ -22,7 +24,6 @@ def scroll_website(time_limit: int) -> None:
 
     if checkbox.is_selected():
         checkbox.click()
-    # Maybe could be a better way to do this
     time.sleep(2)
 
     scroll_pause_time = 2
@@ -34,10 +35,10 @@ def scroll_website(time_limit: int) -> None:
         # Scroll down to bottom
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-        # Wait to load page
+        # Wait to load the page
         time.sleep(scroll_pause_time)
         time_to_break += 2
-        # Calculate new scroll height and compare with last scroll height
+        # Calculate new scroll height and compare with the last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
             print('done crawling end of the page')
@@ -111,13 +112,15 @@ def data_format(names: list, prices: list, end_dates: list, bids: list, links: l
 
 
 def format_to_float(to_be_number: str) -> float:
+    """Formats string format '00 000,00 €', to float type."""
     numeric_string = to_be_number.replace(' ', '').replace(',', '.')
 
     return float(numeric_string[:-1])
 
 
-def crawl_site():
+def crawl_site() -> None:
     """All forest crawler functionality in one function. Returns a dictionary of crawled data."""
+
     start_time = time.monotonic()
     scroll_website(10)
     names = get_property_names()
@@ -125,19 +128,14 @@ def crawl_site():
     end_dates = get_auction_end_dates()
     highest_bids = get_highest_bids()
     links = get_auction_link()
-    # print(type(data_format(names, prices, end_dates, highest_bids, links)[0]))
-    for i in data_format(names, prices, end_dates, highest_bids, links):
-        print(i)
-    end_time = time.monotonic()
-    print(end_time - start_time)
-crawl_site()
 
-# scroll_website(5)
-# a = get_highest_bids()
-# print(a)
-# for i in a[:3:]:
-#     print(type(i))
-# end_time = time.monotonic()
-# print(end_time-start_time)
+    # print(type(data_format(names, prices, end_dates, highest_bids, links)[0]))
+    data = data_format(names, prices, end_dates, highest_bids, links)
+    end_time = time.monotonic()
+    print(data)
+    print(end_time - start_time)
+
+
 # # Try to change container value to Baigiasi vėliausiai, for most recent items in page.
 # # xpath to Baigiasi vėliausiai - "//div[@class="Select__single-value css-qc6sy-singleValue']"
+
