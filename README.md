@@ -50,4 +50,4 @@ The project is structured as follows:
   - `selenium_crawl.py`: Separate functions that make the crawler work.
 - `tests/`: Tests directory.
   - `__init__.py`: Initialization file for tests.
-  - `tests_main.py`: Test scripts for the package
+  - `test_.py`: Test scripts for the package
